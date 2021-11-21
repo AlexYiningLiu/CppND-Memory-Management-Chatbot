@@ -11,7 +11,7 @@
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot()
 {
-    std::cout << "ChatBot Constructor Without Memory Allocation" << std::endl;
+    std::cout << "ChatBot Constructor Without Memory Allocation for: " << this << std::endl;
 
     // invalidate data handles
     _image = nullptr;
@@ -22,7 +22,7 @@ ChatBot::ChatBot()
 // constructor WITH memory allocation
 ChatBot::ChatBot(std::string filename)
 {
-    std::cout << "ChatBot Constructor With Memory Allocation" << std::endl;
+    std::cout << "ChatBot Constructor With Memory Allocation for: " << this << std::endl;
     
     // invalidate data handles
     _chatLogic = nullptr;
@@ -34,7 +34,7 @@ ChatBot::ChatBot(std::string filename)
 
 ChatBot::~ChatBot()
 {
-    std::cout << "ChatBot Destructor" << std::endl;
+    std::cout << "ChatBot Destructor for instance: " << this << std::endl;
 
     // deallocate heap memory
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
@@ -44,8 +44,6 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
-////
 ChatBot::ChatBot(const ChatBot &source)
 {
     std::cout << "ChatBot COPY (constructor) copying content of instance " << &source << " to instance " << this << std::endl;
@@ -77,7 +75,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this);
-    
+
     return *this;
 }
 
@@ -120,9 +118,6 @@ ChatBot &ChatBot::operator=(ChatBot &&source)
 
     return *this;
 }
-
-////
-//// EOF STUDENT CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
