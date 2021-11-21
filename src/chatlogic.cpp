@@ -163,7 +163,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
             }
         }
     }
-    // Use the ChatBot move constructor to create the ChatBot instance
+    // The implementation of the below move semantics references question 77646 on the course's knowledge forum,
+    // particularly the creation of the ChatBot instance.
+    // Use the ChatBot normal constructor to create an instance.
     ChatBot chatBotInstance("../images/chatbot.png");
     // Set communication handle _chatBot for this ChatLogic
     SetChatbotHandle(&chatBotInstance);
@@ -171,8 +173,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     chatBotInstance.SetChatLogicHandle(this);
     // add chatbot to graph root node
     chatBotInstance.SetRootNode(rootNode);
-    // Force compiler to use move semantics by converting lvalue to rvalue
-    rootNode->MoveChatbotHere(std::move(chatBotInstance));    
+    // Force compiler to use move semantics by converting lvalue to rvalue, move constructor is called
+    rootNode->MoveChatbotHere(std::move(chatBotInstance));
 }
 
 void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
